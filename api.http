@@ -5,3 +5,6 @@ Content-Type: application/json
   "username": "pyaesone",
   "password": "abc123"
 }
+
+###
+GET http://localhost:3000/users/600076a640ffdf6be1dd9a9f

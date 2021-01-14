@@ -4,6 +4,7 @@ import Router from "vue-router";
 const Login = () => import("@/views/Login");
 const Group = () => import("@/views/Group/Index");
 const User = () => import("@/views/User/Index");
+const UserEdit = () => import("@/views/User/Edit");
 const DashboardContainer = () => import("@/containers/Dashboard");
 
 Vue.use(Router);
@@ -51,6 +52,11 @@ function configRoutes() {
           path: "/users",
           name: "Users",
           component: User,
+        },
+        {
+          path: "/users/edit/:id",
+          name: "EditUsers",
+          component: UserEdit,
         },
       ],
     },

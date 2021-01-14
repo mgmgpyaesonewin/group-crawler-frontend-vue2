@@ -26,7 +26,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="tw-bg-gray-300">
       <div class="tw-px-8 tw-py-12">
         <router-view></router-view>
       </div>

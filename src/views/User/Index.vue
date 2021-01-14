@@ -14,7 +14,7 @@
         {{ format(item.created_at) }}
       </template>
       <template v-slot:[`item._id`]="{ item }">
-        <v-btn :to='`/edit/${item._id}`' color="primary" class="tw-mx-2">Edit</v-btn>
+        <v-btn :to='`/users/edit/${item._id}`' color="primary" class="tw-mx-2">Edit</v-btn>
         <v-btn color="error">Delete</v-btn>
       </template>
       <template v-slot:top>
