@@ -1,27 +1,58 @@
-import Vue from 'vue'
-import Router from 'vue-router';
+import Vue from "vue";
+import Router from "vue-router";
 
-const Login = () => import('@/views/Login')
+const Login = () => import("@/views/Login");
+const Group = () => import("@/views/Group/Index");
+const User = () => import("@/views/User/Index");
+const DashboardContainer = () => import("@/containers/Dashboard");
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-    mode: "history",
-    linkActiveClass: "active",
-    scrollBehavior: () => ({ y: 0 }),
-    routes: configRoutes()
+  mode: "history",
+  linkActiveClass: "active",
+  scrollBehavior: () => ({ y: 0 }),
+  routes: configRoutes(),
 });
 
 function configRoutes() {
-    return [
+  return [
+    {
+      path: "/",
+      name: "Home",
+      redirect: "/login",
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login,
+    },
+    {
+      path: "/dashboard",
+      name: "Dashboard",
+      component: DashboardContainer,
+      children: [
         {
-            path: '/',
-            name: 'Home',
+          path: "/posts",
+          name: "Posts",
+          component: Group,
         },
         {
-            path: '/login',
-            name: 'Login',
-            component: Login,
-        }
-    ];
+          path: "/groups",
+          name: "Groups",
+          component: Group,
+        },
+        {
+          path: "/industries",
+          name: "Industries",
+          component: Group,
+        },
+        {
+          path: "/users",
+          name: "Users",
+          component: User,
+        },
+      ],
+    },
+  ];
 }

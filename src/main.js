@@ -5,7 +5,6 @@ import router from './router'
 import './index.css'
 
 Vue.config.productionTip = false
-console.log(router);
 
 new Vue({
   router,

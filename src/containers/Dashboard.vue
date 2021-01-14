@@ -27,13 +27,14 @@
     </v-app-bar>
 
     <v-main>
-      <HelloWorld/>
+      <div class="tw-px-8 tw-py-12">
+        <router-view></router-view>
+      </div>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld';
 import Logo from '../components/Logo';
 import Menu from '../components/Menu';
 
@@ -41,7 +42,6 @@ export default {
   name: 'DashboardContainer',
 
   components: {
-    HelloWorld,
     "my-logo": Logo,
     "my-menu": Menu
   },
