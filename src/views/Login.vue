@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content>
+    <v-main>
       <v-container fill-height="fill-height">
         <v-layout align-center="align-center" justify-center="justify-center">
             <div class="tw-flex login-form tw-text-center">
@@ -20,14 +20,14 @@
                             label="Password"
                             type="password"
                         ></v-text-field>
-                        <v-btn @click.prevent="" block="block" color="primary" type="submit">Sign in</v-btn>
+                        <v-btn @click.prevent="login" block="block" color="primary" type="submit">Sign in</v-btn>
                         </v-form>
                     </v-card-text>
                 </v-card>
             </div>
         </v-layout>
       </v-container>
-    </v-content>
+    </v-main>
     <v-footer app="app">
         <v-flex class="tw-text-center">© 2021. All rights reserved.</v-flex>
     </v-footer>
@@ -35,6 +35,9 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { baseURL } from '@/api.js';
+
 export default {
   data: () => ({
     username: "",
@@ -42,8 +45,19 @@ export default {
     showPassword: false,
   }),
   methods: {
-    validate() {
-      console.log("valid");
+    login() {
+      axios.post(`${baseURL}auth/login`, {
+        username: this.username,
+        password: this.password
+      })
+        .then((response) => {
+          const { access_token } = response.data;
+          localStorage.setItem('access_token', access_token);
+          this.$router.push('/users');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
