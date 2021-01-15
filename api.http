@@ -10,4 +10,13 @@ Content-Type: application/json
 GET http://localhost:3000/users/600076a640ffdf6be1dd9a9f
 
 ###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "username": "pyaesonenew",
+  "password": "abc123"
+}
+
+###
 DELETE http://localhost:3000/users/6000659b40ffdf6be1dd9a9e

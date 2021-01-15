@@ -18,6 +18,9 @@
         <v-btn color="error" @click="deleteUser(item._id)">Delete</v-btn>
       </template>
       <template v-slot:top>
+        <div class="tw-flex tw-flex-row-reverse">
+          <v-btn to='/users/new' color="primary" class="tw-mx-2">New User</v-btn>
+        </div>
         <v-text-field
           v-model="search"
           label="Search Anythings"
