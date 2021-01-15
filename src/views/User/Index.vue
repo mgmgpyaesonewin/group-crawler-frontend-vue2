@@ -15,7 +15,7 @@
       </template>
       <template v-slot:[`item._id`]="{ item }">
         <v-btn :to='`/users/edit/${item._id}`' color="primary" class="tw-mx-2">Edit</v-btn>
-        <v-btn color="error">Delete</v-btn>
+        <v-btn color="error" @click="deleteUser(item._id)">Delete</v-btn>
       </template>
       <template v-slot:top>
         <v-text-field
@@ -25,20 +25,26 @@
         ></v-text-field>
       </template>
     </v-data-table>
+    <toast :status.sync="isSuccess" message="Deleted Successfully" />
   </div>
 </template>
 
 <script>
 import { http } from '@/api.js';
 import moment from 'moment';
+import Toast from '@/components/Toast.vue';
 
 export default {
-  name: "Users",
+  name: "UsersTable",
+  components: {
+    Toast,
+  },
   data() {
     return {
       search: "",
       calories: "",
       users: [],
+      isSuccess: false,
     };
   },
   computed: {
@@ -57,7 +63,7 @@ export default {
   },
   methods: {
     getUsers() {
-      http.get('http://localhost:3000/users')
+      http.get('users')
         .then((response) => {
           this.users = response.data;
         })
@@ -66,7 +72,17 @@ export default {
         });
     },
     deleteUser(user_id) {
-      console.log(user_id);
+      http.delete(`users/${user_id}`)
+        .then((response) => {
+          const { status } = response;
+          if (status === 200) {
+            this.isSuccess = true;
+            this.getUsers();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     format(dateString) {
       return moment.utc(dateString).local().format('ddd DD/MM/YY, h:mm A');
