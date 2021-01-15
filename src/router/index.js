@@ -3,13 +3,15 @@ import Router from "vue-router";
 
 const DashboardContainer = () => import("@/containers/Dashboard");
 const Login = () => import("@/views/Login");
-const Group = () => import("@/views/Group/Index");
 const User = () => import("@/views/User/Index");
 const UserNew = () => import("@/views/User/New");
 const UserEdit = () => import("@/views/User/Edit");
 const Industry = () => import("@/views/Industry/Index");
 const IndustryNew = () => import("@/views/Industry/New");
 const IndustryEdit = () => import("@/views/Industry/Edit");
+const Group = () => import("@/views/Group/Index");
+const GroupNew = () => import("@/views/Group/New");
+const GroupEdit = () => import("@/views/Group/Edit");
 
 
 Vue.use(Router);
@@ -44,11 +46,6 @@ function configRoutes() {
           component: Group,
         },
         {
-          path: "/groups",
-          name: "Groups",
-          component: Group,
-        },
-        {
           path: "/industries",
           name: "Industries",
           component: Industry,
@@ -77,6 +74,21 @@ function configRoutes() {
           path: "/users/edit/:id",
           name: "EditUsers",
           component: UserEdit,
+        },
+        {
+          path: "/groups",
+          name: "Group",
+          component: Group,
+        },
+        {
+          path: "/groups/new",
+          name: "NewGroups",
+          component: GroupNew,
+        },
+        {
+          path: "/groups/edit/:id",
+          name: "EditGroups",
+          component: GroupEdit,
         },
       ],
     },
