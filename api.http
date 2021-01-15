@@ -20,3 +20,28 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/users/6000659b40ffdf6be1dd9a9e
+
+###
+GET http://localhost:3000/industries
+
+###
+POST http://localhost:3000/industries
+Content-Type: application/json
+
+{
+  "name": "Yoma Bank",
+}
+
+###
+GET http://localhost:3000/industries/5ffadb3208ef5346cec91613
+
+###
+PATCH  http://localhost:3000/industries/5ffadb3208ef5346cec91613
+Content-Type: application/json
+
+{
+  "name": "KBZ Bank"
+}
+
+
+

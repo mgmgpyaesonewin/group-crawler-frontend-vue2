@@ -1,12 +1,16 @@
 import Vue from "vue";
 import Router from "vue-router";
 
+const DashboardContainer = () => import("@/containers/Dashboard");
 const Login = () => import("@/views/Login");
 const Group = () => import("@/views/Group/Index");
 const User = () => import("@/views/User/Index");
 const UserNew = () => import("@/views/User/New");
 const UserEdit = () => import("@/views/User/Edit");
-const DashboardContainer = () => import("@/containers/Dashboard");
+const Industry = () => import("@/views/Industry/Index");
+const IndustryNew = () => import("@/views/Industry/New");
+const IndustryEdit = () => import("@/views/Industry/Edit");
+
 
 Vue.use(Router);
 
@@ -47,7 +51,17 @@ function configRoutes() {
         {
           path: "/industries",
           name: "Industries",
-          component: Group,
+          component: Industry,
+        },
+        {
+          path: "/industries/new",
+          name: "NewIndustries",
+          component: IndustryNew,
+        },
+        {
+          path: "/industries/edit/:id",
+          name: "EditIndustries",
+          component: IndustryEdit,
         },
         {
           path: "/users",
