@@ -17,17 +17,31 @@
         {{ format(item.created_at) }}
       </template>
       <template v-slot:[`item._id`]="{ item }">
-        <v-btn :to='`/groups/edit/${item._id}`' color="primary" class="tw-mx-2">Edit</v-btn>
-        <v-btn color="error" @click="deleteGroups(item._id)">Delete</v-btn>
+        <v-btn :to='`/groups/edit/${item._id}`' color="primary" class="tw-m-2">
+          <v-icon dense left>
+            fa fa-edit
+          </v-icon>
+          Edit
+        </v-btn>
+        <v-btn color="error" @click="deleteGroups(item._id)" class="tw-mb-2">
+          <v-icon dense left>fa fa-trash</v-icon>
+          Delete
+        </v-btn>
       </template>
       <template v-slot:top>
         <div class="tw-flex tw-flex-row-reverse">
-          <v-btn to='/groups/new' color="primary" class="tw-mx-2">New Group</v-btn>
+          <v-btn to='/groups/new' color="primary" class="tw-mx-2">
+            <v-icon dense left>
+              fa fa-plus
+            </v-icon>
+            New Group
+          </v-btn>
         </div>
         <v-text-field
           v-model="search"
+          prepend-icon="fa fa-search"
           label="Search Anythings"
-          class="mx-4"
+          class="mx-4 my-4"
         ></v-text-field>
       </template>
     </v-data-table>
