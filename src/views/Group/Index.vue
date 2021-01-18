@@ -37,12 +37,18 @@
             New Group
           </v-btn>
         </div>
-        <v-text-field
-          v-model="search"
-          prepend-icon="fa fa-search"
-          label="Search Anythings"
-          class="mx-4 my-4"
-        ></v-text-field>
+        <div class="tw-flex">
+          <v-text-field
+            v-model="search"
+            prepend-icon="fa fa-search"
+            label="Search Anythings"
+            class="mx-4 my-4"
+          ></v-text-field>
+          <v-select
+            :items="items"
+            label="Standard"
+          ></v-select>
+        </div>
       </template>
     </v-data-table>
     <toast :status.sync="isSuccess" message="Deleted Successfully" />
