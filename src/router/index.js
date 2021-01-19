@@ -17,7 +17,7 @@ const GroupEdit = () => import("@/views/Group/Edit");
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
+  mode: "hash",
   linkActiveClass: "active",
   scrollBehavior: () => ({ y: 0 }),
   routes: configRoutes(),
