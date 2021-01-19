@@ -37,17 +37,24 @@
             New Group
           </v-btn>
         </div>
-        <div class="tw-flex">
-          <v-text-field
-            v-model="search"
-            prepend-icon="fa fa-search"
-            label="Search Anythings"
-            class="mx-4 my-4"
-          ></v-text-field>
-          <v-select
-            :items="items"
-            label="Standard"
-          ></v-select>
+        <div class="tw-flex mx-4 my-4">
+          <div class="tw-w-2/4 tw-mr-2">
+            <v-text-field
+              v-model="search"
+              prepend-icon="fa fa-search"
+              label="Search Anythings"
+            ></v-text-field>
+          </div>
+          <div class="tw-w-2/4">
+            <v-select
+              v-model="selected_industry"
+              :items="industries"
+              label="Industry"
+              item-text="name"
+              item-value="_id"
+              @change="getGroups"
+            ></v-select>
+          </div>
         </div>
       </template>
     </v-data-table>
@@ -69,6 +76,8 @@ export default {
     return {
       search: "",
       groups: [],
+      selected_industry: "",
+      industries: [],
       isSuccess: false,
     };
   },
@@ -90,9 +99,23 @@ export default {
   },
   methods: {
     getGroups() {
-      http.get('groups')
+      http.get(`groups?industry_id=${this.selected_industry}`)
         .then((response) => {
           this.groups = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    getIndustries() {
+      http.get('industries')
+        .then((response) => {
+          let { data } = response;
+          data.push({
+            '_id': '',
+            'name': 'All'
+          });
+          this.industries = data;
         })
         .catch((error) => {
           console.log(error);
@@ -117,6 +140,7 @@ export default {
   },
   mounted() {
     this.getGroups();
+    this.getIndustries();
   }
 };
 </script>
