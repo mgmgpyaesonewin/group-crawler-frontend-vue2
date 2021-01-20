@@ -36,7 +36,7 @@ import { http } from '@/api.js';
 import Toast from "@/components/Toast.vue";
 
 export default {
-  name: 'EditGroup',
+  name: 'NewGroup',
   components: {
     Toast,
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="tw-rounded tw-shadow-md tw-mx-4 tw-my-6 tw-px-4 tw-py-4 tw-bg-white">
-    <h3>Update User</h3>
+    <h3>Create Industry</h3>
     <form>
       <v-text-field
         v-model="industry_name"

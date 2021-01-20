@@ -12,6 +12,7 @@ const IndustryEdit = () => import("@/views/Industry/Edit");
 const Group = () => import("@/views/Group/Index");
 const GroupNew = () => import("@/views/Group/New");
 const GroupEdit = () => import("@/views/Group/Edit");
+const PostNew = () => import("@/views/Post/New");
 
 
 Vue.use(Router);
@@ -89,6 +90,11 @@ function configRoutes() {
           path: "/groups/edit/:id",
           name: "EditGroups",
           component: GroupEdit,
+        },
+        {
+          path: "/posts/new",
+          name: "PostNew",
+          component: PostNew,
         },
       ],
     },

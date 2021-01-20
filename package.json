@@ -15,7 +15,8 @@
     "tailwindcss": "^1.9.6",
     "vue": "^2.6.11",
     "vue-router": "^3.4.9",
-    "vuetify": "^2.2.11"
+    "vuetify": "^2.2.11",
+    "vuetify-datetime-picker": "^2.1.1"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
