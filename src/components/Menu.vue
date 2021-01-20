@@ -27,7 +27,7 @@ export default {
     data: () => ({
       selectedItem: 1,
       items: [
-        { text: 'Posts', icon: 'mdi-clock', link: '/posts' },
+        { text: 'Posts', icon: 'mdi-clock', link: '/posts/new' },
         { text: 'Groups', icon: 'mdi-flag', link: '/groups' },
         { text: 'Industries', icon: 'fa fa-hammer', link: '/industries' },
         { text: 'Users', icon: 'mdi-account', link: '/users' },
