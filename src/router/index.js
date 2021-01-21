@@ -12,6 +12,7 @@ const IndustryEdit = () => import("@/views/Industry/Edit");
 const Group = () => import("@/views/Group/Index");
 const GroupNew = () => import("@/views/Group/New");
 const GroupEdit = () => import("@/views/Group/Edit");
+const Post = () => import("@/views/Post/Index");
 const PostNew = () => import("@/views/Post/New");
 
 
@@ -41,11 +42,6 @@ function configRoutes() {
       name: "Dashboard",
       component: DashboardContainer,
       children: [
-        {
-          path: "/posts",
-          name: "Posts",
-          component: Group,
-        },
         {
           path: "/industries",
           name: "Industries",
@@ -90,6 +86,11 @@ function configRoutes() {
           path: "/groups/edit/:id",
           name: "EditGroups",
           component: GroupEdit,
+        },
+        {
+          path: "/posts",
+          name: "Post",
+          component: Post,
         },
         {
           path: "/posts/new",
