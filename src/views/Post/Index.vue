@@ -96,42 +96,23 @@
           <div class="tw-rounded tw-shadow-md tw-px-4 tw-py-4 tw-bg-white">
             <div class="tw-flex tw-justify-between">
               <div class="tw-flex">
-                <div class="tw-flex-shrink-0 tw-h-10 tw-w-10">
-                  <img class="tw-w-10 tw-h-10 tw-rounded-full" src="https://dummyimage.com/600x400/000/fff" alt="" />
+                <div class="tw-flex-shrink-0 tw-h-10 tw-w-10 tw-mt-1">
+                  <img class="tw-w-10 tw-h-10 tw-rounded-full" :src='`https://picsum.photos/140/140?random=${index}`' alt="" />
                 </div>
-                <div class="tw-my-2 tw-mx-1">{{ post.profile_name }}</div>
+                <div class="tw-flex tw-flex-col tw-mx-2">
+                  <div class="tw-text-base tw-font-medium">
+                    {{ post.profile_name }}
+                  </div>
+                  <div class="tw-text-xs tw-font-light">
+                    {{ formatDate(post.date) }}
+                  </div>
+                </div>  
                 <v-icon class="tw-mx-2" v-show="post.groups.length > 0">fa fa-caret-right</v-icon>
-                <div class="tw-my-2 tw-mx-1" v-show="post.groups.length > 0" v-for="group in post.groups" :key="group._id">
+                <div class="tw-my-2 tw-mx-1 tw-text-base tw-font-normal" v-show="post.groups.length > 0" v-for="group in post.groups" :key="group._id">
                   {{ group.name }}
                 </div>
               </div>
-              <div class="tw-flex">
-                <div class="text-center">
-                  <v-menu offset-y>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        depressed
-                        v-bind="attrs"
-                        v-on="on"
-                        color="white"
-                      >
-                        <v-icon>fa fa-ellipsis-v</v-icon>
-                      </v-btn>
-                    </template>
-                    <v-list>
-                      <v-list-item :to='`/posts/edit/${post._id}`'>
-                        <v-list-item-title>Edit</v-list-item-title>
-                      </v-list-item>
-                      <v-list-item @click="deletePost(post._id)">
-                        <v-list-item-title>Delete</v-list-item-title>
-                      </v-list-item>
-                    </v-list>
-                  </v-menu>
-                </div>
-              </div>
-            </div>
-            <div class="tw-flex">
-              <p class="tw-my-2 tw-mx-1">Posted on {{ formatDate(post.date) }}</p>
+              <card-action :id="post._id" @deleted="deletePost"></card-action>
             </div>
             <div class="tw-flex tw-py-3">
               <read-more more-str="read more" :text="post.text" link="#" less-str="read less" :max-chars="50"></read-more>
@@ -167,12 +148,14 @@
 
 <script>
 import ReadMore from '@/components/ReadMore.vue';
+import CardAction from '@/components/Action.vue';
 import { http } from '@/api.js';
 
 export default {
   name: 'Posts',
   components: {
-    ReadMore
+    ReadMore,
+    CardAction
   },
   data() {
     return {
@@ -192,7 +175,7 @@ export default {
       this.posts = data;
     },
     formatDate(date) {
-      return new Date(date).toLocaleTimeString(undefined, { year: "numeric", month: "long", day: "numeric" });
+      return this.$date(date).fromNow();
     },
     deletePost(id) {
       http.delete(`posts/${id}`)

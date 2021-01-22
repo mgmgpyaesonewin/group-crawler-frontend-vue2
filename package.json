@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "dayjs": "^1.10.4",
     "moment": "^2.29.1",
     "tailwindcss": "^1.9.6",
     "vue": "^2.6.11",
