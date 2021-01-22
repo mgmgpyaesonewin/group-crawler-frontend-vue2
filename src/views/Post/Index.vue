@@ -134,6 +134,23 @@
             <div class="tw-flex tw-py-3">
               <read-more more-str="read more" :text="post.text" link="#" less-str="read less" :max-chars="50"></read-more>
             </div>
+            <div class="tw-flex tw-my-2" v-for="(comment, index) in post.comments" :key="index">
+              <div class="tw-flex">
+                <div class="tw-flex-shrink-0 tw-h-10 tw-w-10">
+                  <img class="tw-w-10 tw-h-10 tw-rounded-full" src="https://dummyimage.com/600x400/000/fff" alt="" />
+                </div>
+                <div class="tw-bg-gray-200 tw-rounded-lg tw-mx-2 tw-px-2 tw-pb-2">
+                  <div class="tw-font-medium">
+                    <a href="#" class="hover:tw-underline tw-text-sm">
+                      <small>{{ comment.name }}</small>
+                    </a>
+                  </div>
+                  <div class="tw-text-xs">
+                    {{ comment.text }}
+                  </div>            
+                </div>
+              </div>
+            </div>
           </div>
         </v-col>
         <v-responsive
