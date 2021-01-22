@@ -94,13 +94,39 @@
       <template v-for="(post, index) in posts">
         <v-col :key="index">
           <div class="tw-rounded tw-shadow-md tw-px-4 tw-py-4 tw-bg-white">
-            <div class="tw-flex">
-              <div class="tw-flex-shrink-0 tw-h-10 tw-w-10">
-                <img class="tw-w-10 tw-h-10 tw-rounded-full" src="https://dummyimage.com/600x400/000/fff" alt="" />
+            <div class="tw-flex tw-justify-between">
+              <div class="tw-flex">
+                <div class="tw-flex-shrink-0 tw-h-10 tw-w-10">
+                  <img class="tw-w-10 tw-h-10 tw-rounded-full" src="https://dummyimage.com/600x400/000/fff" alt="" />
+                </div>
+                <div class="tw-my-2 tw-mx-1">{{ post.profile_name }}</div>
+                <v-icon class="tw-mx-2">fa fa-caret-right</v-icon>
+                <div class="tw-my-2 tw-mx-1">{{ post.group }}</div>
               </div>
-              <div class="tw-my-2 tw-mx-1">{{ post.profile_name }}</div>
-              <v-icon class="tw-mx-2">fa fa-caret-right</v-icon>
-              <div class="tw-my-2 tw-mx-1">{{ post.group }}</div>
+              <div class="tw-flex">
+                <div class="text-center">
+                  <v-menu offset-y>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        depressed
+                        v-bind="attrs"
+                        v-on="on"
+                        color="white"
+                      >
+                        <v-icon>fa fa-ellipsis-v</v-icon>
+                      </v-btn>
+                    </template>
+                    <v-list>
+                      <v-list-item :to='`/posts/edit/${post._id}`'>
+                        <v-list-item-title>Edit</v-list-item-title>
+                      </v-list-item>
+                      <v-list-item @click="deletePost(post._id)">
+                        <v-list-item-title>Delete</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                </div>
+              </div>
             </div>
             <div class="tw-flex">
               <p class="tw-my-2 tw-mx-1">Posted on {{ formatDate(post.date) }}</p>
@@ -148,6 +174,19 @@ export default {
     },
     formatDate(date) {
       return new Date(date).toLocaleTimeString(undefined, { year: "numeric", month: "long", day: "numeric" });
+    },
+    deletePost(id) {
+      http.delete(`posts/${id}`)
+        .then((response) => {
+          const { status } = response;
+          if (status === 200) {
+            this.isSuccess = true;
+            this.getPosts();
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   },
   mounted() {
