@@ -3,18 +3,18 @@ import Router from "vue-router";
 
 const DashboardContainer = () => import("@/containers/Dashboard");
 const Login = () => import("@/views/Login");
-const User = () => import("@/views/User/Index");
-const UserNew = () => import("@/views/User/New");
-const UserEdit = () => import("@/views/User/Edit");
-const Industry = () => import("@/views/Industry/Index");
-const IndustryNew = () => import("@/views/Industry/New");
-const IndustryEdit = () => import("@/views/Industry/Edit");
+const GroupEdit = () => import("@/views/Group/Edit");
 const Group = () => import("@/views/Group/Index");
 const GroupNew = () => import("@/views/Group/New");
-const GroupEdit = () => import("@/views/Group/Edit");
+const IndustryEdit = () => import("@/views/Industry/Edit");
+const Industry = () => import("@/views/Industry/Index");
+const IndustryNew = () => import("@/views/Industry/New");
+const PostEdit = () => import("@/views/Post/Edit");
 const Post = () => import("@/views/Post/Index");
 const PostNew = () => import("@/views/Post/New");
-const PostEdit = () => import("@/views/Post/Edit");
+const UserEdit = () => import("@/views/User/Edit");
+const User = () => import("@/views/User/Index");
+const UserNew = () => import("@/views/User/New");
 
 Vue.use(Router);
 
