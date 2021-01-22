@@ -100,8 +100,10 @@
                   <img class="tw-w-10 tw-h-10 tw-rounded-full" src="https://dummyimage.com/600x400/000/fff" alt="" />
                 </div>
                 <div class="tw-my-2 tw-mx-1">{{ post.profile_name }}</div>
-                <v-icon class="tw-mx-2">fa fa-caret-right</v-icon>
-                <div class="tw-my-2 tw-mx-1">{{ post.group }}</div>
+                <v-icon class="tw-mx-2" v-show="post.groups.length > 0">fa fa-caret-right</v-icon>
+                <div class="tw-my-2 tw-mx-1" v-show="post.groups.length > 0" v-for="group in post.groups" :key="group._id">
+                  {{ group.name }}
+                </div>
               </div>
               <div class="tw-flex">
                 <div class="text-center">

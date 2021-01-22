@@ -151,7 +151,7 @@ export default {
       this.profile_link = data.profile_link;
       this.post_link = data.link;
       this.post_date = new Date(data.date);
-      this.selected_group = data.group;
+      this.selected_group = data.group_id;
       this.selected_post_types = data.type;
       this.attachments = data.attachments;
       this.post_text = data.text;
@@ -162,7 +162,7 @@ export default {
         profile_link: this.profile_link,
         link: this.post_link,
         date: this.post_date.toJSON(),
-        group: this.selected_group,
+        group_id: this.selected_group,
         type: this.selected_post_types,
         text: this.post_text,
         attachments: this.attachments,

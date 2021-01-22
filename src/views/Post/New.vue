@@ -152,7 +152,7 @@ export default {
         profile_link: this.profile_link,
         link: this.post_link,
         date: this.post_date.toJSON(),
-        group: this.selected_group,
+        group_id: this.selected_group,
         type: this.selected_post_types,
         text: this.post_text,
         attachments: this.attachments,

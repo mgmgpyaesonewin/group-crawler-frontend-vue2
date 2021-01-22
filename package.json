@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "ssh ubuntu@52.148.79.239 'bash -s' < deploy.sh"
   },
   "dependencies": {
     "axios": "^0.21.1",
