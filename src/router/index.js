@@ -14,7 +14,7 @@ const GroupNew = () => import("@/views/Group/New");
 const GroupEdit = () => import("@/views/Group/Edit");
 const Post = () => import("@/views/Post/Index");
 const PostNew = () => import("@/views/Post/New");
-
+const PostEdit = () => import("@/views/Post/Edit");
 
 Vue.use(Router);
 
@@ -96,6 +96,11 @@ function configRoutes() {
           path: "/posts/new",
           name: "PostNew",
           component: PostNew,
+        },
+        {
+          path: "/posts/edit/:id",
+          name: "EditPosts",
+          component: PostEdit,
         },
       ],
     },
