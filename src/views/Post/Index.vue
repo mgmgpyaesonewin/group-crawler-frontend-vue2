@@ -103,9 +103,7 @@
                   <div class="tw-text-sm tw-font-medium">
                     {{ post.profile_name }}
                   </div>
-                  <div class="tw-text-xs tw-font-light">
-                    {{ formatDate(post.date) }}
-                  </div>
+                  <datetime-menu :posted-date="post.date" :created-date="post.created_at"></datetime-menu>
                 </div>  
                 <v-icon class="tw-mx-2" v-show="post.groups.length > 0">fa fa-caret-right</v-icon>
                 <div class="tw-my-2 tw-mx-1 tw-text-sm tw-font-normal" v-show="post.groups.length > 0" v-for="group in post.groups" :key="group._id">
@@ -149,13 +147,16 @@
 <script>
 import ReadMore from '@/components/ReadMore.vue';
 import CardAction from '@/components/Action.vue';
+import DateTimeMenu from '@/components/DateTimeMenu.vue';
 import { http } from '@/api.js';
+
 
 export default {
   name: 'Posts',
   components: {
     ReadMore,
-    CardAction
+    CardAction,
+    "datetime-menu": DateTimeMenu,
   },
   data() {
     return {
