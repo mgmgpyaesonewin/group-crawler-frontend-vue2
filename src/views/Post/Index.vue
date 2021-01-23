@@ -100,7 +100,7 @@
                   <img class="tw-w-10 tw-h-10 tw-rounded-full" :src='`https://picsum.photos/140/140?random=${index}`' alt="" />
                 </div>
                 <div class="tw-flex tw-flex-col tw-mx-2">
-                  <div class="tw-text-base tw-font-medium">
+                  <div class="tw-text-sm tw-font-medium">
                     {{ post.profile_name }}
                   </div>
                   <div class="tw-text-xs tw-font-light">
@@ -108,14 +108,14 @@
                   </div>
                 </div>  
                 <v-icon class="tw-mx-2" v-show="post.groups.length > 0">fa fa-caret-right</v-icon>
-                <div class="tw-my-2 tw-mx-1 tw-text-base tw-font-normal" v-show="post.groups.length > 0" v-for="group in post.groups" :key="group._id">
+                <div class="tw-my-2 tw-mx-1 tw-text-sm tw-font-normal" v-show="post.groups.length > 0" v-for="group in post.groups" :key="group._id">
                   {{ group.name }}
                 </div>
               </div>
               <card-action :id="post._id" @deleted="deletePost"></card-action>
             </div>
-            <div class="tw-flex tw-py-3">
-              <read-more more-str="read more" :text="post.text" link="#" less-str="read less" :max-chars="50"></read-more>
+            <div class="tw-flex tw-py-4">
+              <read-more more-str="read more" :text="post.text" link="#" less-str="read less" :max-chars="150"></read-more>
             </div>
             <div class="tw-flex tw-my-2" v-for="(comment, index) in post.comments" :key="index">
               <div class="tw-flex">

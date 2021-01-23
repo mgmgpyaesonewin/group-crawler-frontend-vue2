@@ -1,9 +1,9 @@
 <template>
 	<div>
-    <span v-html="formattedString"></span>
+    <span class="tw-text-sm" v-html="formattedString"></span>
     <span v-show="text.length > maxChars">
-      <a :href="link" v-show="!isReadMore" v-on:click="triggerReadMore($event, true)">{{ moreStr }}</a>
-      <a :href="link" v-show="isReadMore" v-on:click="triggerReadMore($event, false)">{{ lessStr }}</a>
+      <a class="tw-no-underline tw-text-sm tw-mx-2" :href="link" v-show="!isReadMore" v-on:click="triggerReadMore($event, true)">{{ moreStr }}</a>
+      <a class="tw-no-underline tw-text-sm tw-mx-2" :href="link" v-show="isReadMore" v-on:click="triggerReadMore($event, false)">{{ lessStr }}</a>
     </span>
 	</div>
 </template>
