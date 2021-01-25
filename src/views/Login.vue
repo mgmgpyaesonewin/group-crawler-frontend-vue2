@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { baseURL } from '@/api.js';
+// import axios from 'axios';
+// import { baseURL } from '@/api.js';
 
 export default {
   data: () => ({
