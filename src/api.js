@@ -9,3 +9,6 @@ export const http = axios.create({
     Authorization: `Bearer ${token}`
   }
 });
+
+export const nlpURL = 'https://teatimebook.com/nlp/nlpclassifier/batch/async';
+export const nlp = axios.create({});

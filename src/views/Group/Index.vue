@@ -8,7 +8,7 @@
       :search="search"
     >
       <template v-slot:[`item.industry`]="{ item }">
-        {{ item.industry[0].name }}
+        {{ item.industries.name }}
       </template>
       <template v-slot:[`item.created_at`]="{ item }">
         {{ format(item.created_at) }}
@@ -16,14 +16,14 @@
       <template v-slot:[`item.updated_at`]="{ item }">
         {{ format(item.created_at) }}
       </template>
-      <template v-slot:[`item._id`]="{ item }">
-        <v-btn :to='`/groups/edit/${item._id}`' color="primary" class="tw-m-2">
+      <template v-slot:[`item.id`]="{ item }">
+        <v-btn :to='`/groups/edit/${item.id}`' color="primary" class="tw-m-2">
           <v-icon dense left>
             fa fa-edit
           </v-icon>
           Edit
         </v-btn>
-        <v-btn color="error" @click="deleteGroups(item._id)" class="tw-mb-2">
+        <v-btn color="error" @click="deleteGroups(item.id)" class="tw-m-2">
           <v-icon dense left>fa fa-trash</v-icon>
           Delete
         </v-btn>
@@ -51,7 +51,7 @@
               :items="industries"
               label="Industry"
               item-text="name"
-              item-value="_id"
+              item-value="id"
               @change="getGroups"
             ></v-select>
           </div>
@@ -93,7 +93,7 @@ export default {
         { text: "Industry", value: "industry" },
         { text: "Created Date", value: "created_at" },
         { text: "Updated Date", value: "updated_at" },
-        { text: "Action", align:"center", value: "_id" },
+        { text: "Action", align:"center", value: "id" },
       ];
     },
   },

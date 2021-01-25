@@ -13,9 +13,9 @@
       <template v-slot:[`item.updated_at`]="{ item }">
         {{ format(item.created_at) }}
       </template>
-      <template v-slot:[`item._id`]="{ item }">
-        <v-btn :to='`/industries/edit/${item._id}`' color="primary" class="tw-mx-2">Edit</v-btn>
-        <v-btn color="error" @click="deleteIndustries(item._id)">Delete</v-btn>
+      <template v-slot:[`item.id`]="{ item }">
+        <v-btn :to='`/industries/edit/${item.id}`' color="primary" class="tw-mx-2">Edit</v-btn>
+        <v-btn color="error" @click="deleteIndustries(item.id)">Delete</v-btn>
       </template>
       <template v-slot:top>
         <div class="tw-flex tw-flex-row-reverse">
@@ -59,7 +59,7 @@ export default {
         },
         { text: "Created Date", value: "created_at" },
         { text: "Updated Date", value: "updated_at" },
-        { text: "Action", align:"center", value: "_id" },
+        { text: "Action", align:"center", value: "id" },
       ];
     },
   },

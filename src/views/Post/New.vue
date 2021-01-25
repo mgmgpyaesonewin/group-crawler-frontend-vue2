@@ -37,7 +37,8 @@
         label="Groups"
         prepend-icon="fa fa-users"
         item-text="name"
-        item-value="_id"
+        item-value="id"
+        return-object
       ></v-select>
       <v-select
         v-model="selected_post_types"
@@ -114,7 +115,8 @@
 </template>
 
 <script>
-import { http } from '@/api.js';
+import { v4 as uuid } from 'uuid';
+import { http, nlp, nlpURL } from '@/api.js';
 
 export default {
   name: 'NewPost',
@@ -147,17 +149,17 @@ export default {
       this.attachments.splice(index, 1);
     },
     async savePost() {
-      let { data: { id } } = await http.post('posts', {
+      let { data: { id } } = await http.post('posts',{
         profile_name: this.profile_name,
         profile_link: this.profile_link,
         link: this.post_link,
-        date: this.post_date.toJSON(),
-        group_id: this.selected_group,
+        posted_date: this.post_date.toJSON(),
+        group_id: this.selected_group.id,
         type: this.selected_post_types,
         text: this.post_text,
         attachments: this.attachments,
         comments: this.comments_file_contents,
-      })
+      });
       if (id) {
         this.isSuccess = true;
       }
@@ -170,13 +172,24 @@ export default {
           let { propertyName1 } = data;
           let data_arr = propertyName1.split("\n");
           return {
+            id: uuid(),
             name: data_arr[0],
-            text: data_arr[1]
+            text: data_arr[1],
+            industry: this.selected_group.industries.id
           };
         });
         this.comments_file_contents = nodes;
+        // this.getSentiments();
       };
       reader.readAsText(file);
+    },
+    getSentiments() {
+      nlp.post(nlpURL, {
+        'payload': this.comments_file_contents
+      }).then(({ data }) => {
+        let analysed_comments = this.comments_file_contents.map((item, i) => Object.assign({}, item, data[i]));
+        console.log(analysed_comments);
+      });
     },
     getGroups() {
       http.get('groups')
