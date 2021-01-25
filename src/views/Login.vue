@@ -46,18 +46,19 @@ export default {
   }),
   methods: {
     login() {
-      axios.post(`${baseURL}auth/login`, {
-        username: this.username,
-        password: this.password
-      })
-        .then((response) => {
-          const { access_token } = response.data;
-          localStorage.setItem('access_token', access_token);
-          this.$router.push('/users');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      this.$router.push('/posts');
+      // axios.post(`${baseURL}auth/login`, {
+      //   username: this.username,
+      //   password: this.password
+      // })
+      //   .then((response) => {
+      //     const { access_token } = response.data;
+      //     localStorage.setItem('access_token', access_token);
+      //     this.$router.push('/users');
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     },
   },
 };
