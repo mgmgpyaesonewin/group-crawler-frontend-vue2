@@ -115,7 +115,6 @@
 </template>
 
 <script>
-import { v4 as uuid } from 'uuid';
 import { http, nlp, nlpURL } from '@/api.js';
 
 export default {
@@ -172,7 +171,6 @@ export default {
           let { propertyName1 } = data;
           let data_arr = propertyName1.split("\n");
           return {
-            id: uuid(),
             name: data_arr[0],
             text: data_arr[1],
             industry: this.selected_group.industries.id
