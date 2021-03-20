@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import { http, nlp, nlpURL } from '@/api.js';
+import { http } from '@/api.js';
 
 export default {
   name: 'NewPost',
@@ -177,17 +177,8 @@ export default {
           };
         });
         this.comments_file_contents = nodes;
-        // this.getSentiments();
       };
       reader.readAsText(file);
-    },
-    getSentiments() {
-      nlp.post(nlpURL, {
-        'payload': this.comments_file_contents
-      }).then(({ data }) => {
-        let analysed_comments = this.comments_file_contents.map((item, i) => Object.assign({}, item, data[i]));
-        console.log(analysed_comments);
-      });
     },
     getGroups() {
       http.get('groups')

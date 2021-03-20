@@ -3,7 +3,7 @@
     <div class="tw-flex tw-my-2" v-for="(comment, index) in items" :key="index">
       <div class="tw-flex">
         <div class="tw-flex-shrink-0 tw-h-10 tw-w-10">
-          <img class="tw-w-10 tw-h-10 tw-rounded-full" src="https://dummyimage.com/600x400/000/fff" alt=""/>
+          <img class="tw-w-10 tw-h-10 tw-rounded-full" src='https://picsum.photos/140/140?random' alt=""/>
         </div>
         <div class="tw-bg-gray-200 tw-rounded-lg tw-mx-2 tw-px-2 tw-pb-2">
           <div class="tw-font-medium">

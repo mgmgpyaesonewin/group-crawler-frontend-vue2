@@ -1,5 +1,5 @@
 <template>
-  <v-snackbar v-model="status" timeout="2000" right top>
+  <v-snackbar :value="status" @input="$emit('update:status', false)" timeout="2000" right top>
     {{ message }}
     <template v-slot:action="{ attrs }">
       <v-btn color="pink" text v-bind="attrs" @click="$emit('update:status', false)">

@@ -93,30 +93,7 @@
     <v-row>
       <template v-for="(post, index) in posts">
         <v-col :key="index">
-          <div class="tw-rounded tw-shadow-md tw-px-4 tw-py-4 tw-bg-white">
-            <div class="tw-flex tw-justify-between">
-              <div class="tw-flex">
-                <div class="tw-flex-shrink-0 tw-h-10 tw-w-10 tw-mt-1">
-                  <img class="tw-w-10 tw-h-10 tw-rounded-full" :src='`https://picsum.photos/140/140?random=${index}`' alt="" />
-                </div>
-                <div class="tw-flex tw-flex-col tw-mx-2">
-                  <div class="tw-text-sm tw-font-medium">
-                    {{ post.profile_name }}
-                  </div>
-                  <datetime-menu :posted-date="post.date" :created-date="post.created_at"></datetime-menu>
-                </div>
-                <v-icon class="tw-mx-2">fa fa-caret-right</v-icon>
-                <div class="tw-my-2 tw-mx-1 tw-text-sm tw-font-normal" v-for="group in post.groups" :key="group._id">
-                  {{ group.name }}
-                </div>
-              </div>
-              <card-action :id="post._id" @deleted="deletePost"></card-action>
-            </div>
-            <div class="tw-flex tw-py-4">
-              <read-more more-str="read more" :text="post.text" link="#" less-str="read less" :max-chars="150"></read-more>
-            </div>
-            <comment-lists :comments="post.comments"/>
-          </div>
+          <post-card :delete-post="deletePost" :index="index" :post="post"/>
         </v-col>
         <v-responsive
           v-if="(index + 1) %2 === 0"
@@ -126,29 +103,26 @@
       </template>
     </v-row>
     <div class="tw-flex tw-items-center tw-justify-center tw-my-8">
-      <button class="tw-bg-blue-500 hover:tw-bg-blue-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded focus:tw-outline-none" @click="loadMorePosts">
+      <button v-show="isMorePosts" class="tw-bg-blue-500 hover:tw-bg-blue-700 tw-text-white tw-font-bold tw-py-2 tw-px-4 tw-rounded focus:tw-outline-none" @click="loadMorePosts">
         <v-icon color="white" class="tw-animate-bounce tw-mr-2 tw-mb-1">fa fa-sort-down</v-icon>
         Load More
       </button>
     </div>
+    <toast :status.sync="isSuccess" message="Created Successfully" />
   </div>
 </template>
 
 <script>
-import ReadMore from '@/components/ReadMore.vue';
-import CardAction from '@/components/Action.vue';
-import DateTimeMenu from '@/components/DateTimeMenu.vue';
 import {http} from '@/api.js';
-import CommentLists from "@/components/CommentLists";
+import Toast from "@/components/Toast.vue";
+import PostCard from "@/views/Post/PostCard";
 
 
 export default {
   name: 'Posts',
   components: {
-    CommentLists,
-    ReadMore,
-    CardAction,
-    "datetime-menu": DateTimeMenu
+    PostCard,
+    Toast
   },
   data() {
     return {
@@ -161,7 +135,14 @@ export default {
       posts: [],
       msg: '',
       skip: 0,
+      end: false,
+      isSuccess: false,
     }
+  },
+  computed: {
+    isMorePosts() {
+      return !this.end;
+    },
   },
   methods: {
     async getPosts(skip = 0) {
@@ -171,23 +152,20 @@ export default {
     async loadMorePosts() {
       this.skip += 4;
       let posts = await this.getPosts(this.skip);
+      if (posts.length === 0) {
+        this.end = true;
+      }
       this.posts.push(...posts);
     },
     formatDate(date) {
       return this.$date(date).fromNow();
     },
-    deletePost(id) {
-      http.delete(`posts/${id}`)
-        .then((response) => {
-          const { status } = response;
-          if (status === 200) {
-            this.isSuccess = true;
-            this.posts = this.getPosts();
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    async deletePost(id) {
+      let { status } = await http.delete(`posts/${id}`);
+      if (status === 200) {
+        this.isSuccess = true;
+        this.posts = await this.getPosts();
+      }
     }
   },
   async mounted() {
